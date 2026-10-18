@@ -1,0 +1,1098 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111126">
+<title>Молодёжка — Grace Youth SPb</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat:wght@500;600;700;800&family=Neucha&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  color-scheme: dark;
+  --yellow: #ffc72c;
+  --white: #fffdf6;
+  --ink: #111126;
+  --safe: 4.5vmin;
+  --ui: clamp(.8rem, 1.05vmin, 1.2rem);
+  --transition: 500ms;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--white);
+  font-family: Montserrat, Arial, sans-serif;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, input, select { font: inherit; }
+
+button {
+  border: 1px solid #ffffff30;
+  border-radius: 999px;
+  padding: .72em 1.05em;
+  color: var(--white);
+  background: #ffffff12;
+  cursor: pointer;
+  transition: background 180ms, border-color 180ms, opacity 180ms;
+}
+
+button:hover, button:focus-visible {
+  background: #ffffff25;
+  border-color: var(--yellow);
+  outline: none;
+}
+
+button:active { opacity: .7; }
+
+button.primary {
+  color: #181321;
+  background: var(--yellow);
+  border-color: var(--yellow);
+  font-weight: 800;
+}
+
+button.primary:hover { background: #ffda67; }
+
+input, select {
+  min-width: 0;
+  padding: .7em .85em;
+  border: 1px solid #ffffff35;
+  border-radius: .65em;
+  color: white;
+  background: #17162b;
+}
+
+input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: var(--safe);
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 50% 53%, #383057 0%, transparent 48%),
+    radial-gradient(ellipse at 12% 80%, #492d35 0%, transparent 44%),
+    radial-gradient(ellipse at 88% 18%, #25264c 0%, transparent 42%),
+    linear-gradient(145deg, #111126 0%, #1c1b3b 44%, #171326 100%);
+  transition: background var(--transition);
+}
+
+.stage::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  opacity: .12;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+  background-size: 11rem 11rem;
+}
+
+.stage::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 14vmin #05040d55;
+}
+
+/* Warm alternative inspired by the announcement artwork */
+.stage.warm {
+  background:
+    radial-gradient(ellipse at 35% 48%, #b3aaa0 0%, transparent 56%),
+    radial-gradient(ellipse at 90% 70%, #655957 0%, transparent 55%),
+    linear-gradient(125deg, #4e494b, #928781 48%, #575052);
+}
+
+.topbar, .footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.topbar {
+  min-height: 5vh;
+  font-size: clamp(1rem, 2.3vmin, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -.035em;
+}
+
+.schedule {
+  display: flex;
+  align-items: center;
+  gap: .55em;
+  white-space: nowrap;
+}
+
+.schedule .day { color: var(--yellow); }
+.schedule .divider {
+  width: .09em;
+  height: 1.05em;
+  background: var(--yellow);
+}
+.schedule .time { color: var(--white); }
+
+.brand {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  width: min(55vw, 75vh);
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.brand-name {
+  display: inline-block;
+  color: var(--yellow);
+  font-family: "Marck Script", cursive;
+  font-size: clamp(2.8rem, 7.5vmin, 8rem);
+  font-weight: 700;
+  line-height: 1.05;
+  text-shadow: 0 .04em 0 #1c1420;
+}
+
+.brand-swish {
+  display: block;
+  width: 76%;
+  height: auto;
+  margin: -.15em auto 0;
+  overflow: visible;
+}
+
+.brand-swish path {
+  fill: none;
+  stroke: var(--white);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.center {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding-top: 9vh;
+  padding-bottom: 4vh;
+  text-align: center;
+}
+
+.label {
+  max-width: 88%;
+  margin: 0 0 1.3vh;
+  color: var(--white);
+  font-size: clamp(1.15rem, 2.5vmin, 3rem);
+  font-weight: 700;
+  letter-spacing: .035em;
+  text-wrap: balance;
+  text-shadow: 0 .08em .3em #09081480;
+}
+
+.timer-shell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(88vw, 145vh);
+  min-height: 0;
+  flex: 0 1 auto;
+  aspect-ratio: 2.35 / 1;
+  max-height: 57vh;
+}
+
+.bubble {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  filter: drop-shadow(0 .4vmin .7vmin #05040c25);
+}
+
+.bubble path {
+  fill: #17162a09;
+  stroke: var(--white);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.warm .bubble path { fill: #fffdf60b; }
+
+.timer {
+  position: relative;
+  z-index: 1;
+  max-width: 91%;
+  color: var(--yellow);
+  font-family: Neucha, "Marck Script", cursive;
+  font-size: clamp(5rem, 20vmin, 28rem);
+  font-weight: 700;
+  line-height: .98;
+  letter-spacing: -.035em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  text-shadow:
+    0 .035em 0 #5a3b11,
+    0 .07em .12em #00000038;
+  transform: translateY(-.015em);
+}
+
+.timer.long { font-size: clamp(4rem, 14vmin, 20rem); }
+
+.timer.pulse { animation: pulse 1s ease-in-out infinite; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.025); opacity: .83; }
+}
+
+.stage.finished::before {
+  animation: flash 750ms ease-out 1;
+}
+
+@keyframes flash {
+  0% { background-color: #ffc72c80; opacity: .7; }
+  100% { background-color: transparent; opacity: .12; }
+}
+
+/* Trees are vector silhouettes; no raster backgrounds */
+.landscape {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.landscape svg {
+  position: absolute;
+  bottom: -1%;
+  width: 36%;
+  height: 80%;
+  overflow: visible;
+}
+
+.landscape .left { left: -4%; }
+.landscape .right { right: -4%; transform: scaleX(-1); }
+
+.tree-trunk { fill: #100f20; opacity: .78; }
+.tree-back { fill: #763b32; opacity: .55; }
+.tree-leaf-a { fill: #b9502f; opacity: .7; }
+.tree-leaf-b { fill: #e58b38; opacity: .65; }
+.tree-leaf-c { fill: #f1b348; opacity: .7; }
+.tree-leaf-d { fill: #793a39; opacity: .8; }
+
+.leaf-drift { animation: drift 13s ease-in-out infinite alternate; }
+.leaf-drift.slow { animation-duration: 19s; animation-delay: -5s; }
+
+@keyframes drift {
+  from { transform: translate3d(-.5%, 0, 0) rotate(-1deg); }
+  to { transform: translate3d(1.5%, -1%, 0) rotate(2deg); }
+}
+
+.stars {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: .24vmin;
+  height: .24vmin;
+  min-width: 2px;
+  min-height: 2px;
+  border-radius: 50%;
+  background: #fff8dc;
+  box-shadow: 0 0 1.1vmin #fff8dc;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: .2; transform: scale(.7); }
+  to { opacity: .9; transform: scale(1.3); }
+}
+
+.shooting-star {
+  position: absolute;
+  top: 17%;
+  left: -20%;
+  width: 13vmin;
+  height: .18vmin;
+  min-height: 2px;
+  border-radius: 100%;
+  opacity: 0;
+  transform: rotate(-25deg);
+  background: linear-gradient(90deg, transparent, #ffffffd9);
+  filter: drop-shadow(0 0 .6vmin #fff);
+  animation: shoot 14s ease-in infinite;
+  animation-delay: 5s;
+}
+
+@keyframes shoot {
+  0%, 78%, 100% { opacity: 0; transform: translate(0, 0) rotate(-25deg); }
+  80% { opacity: .95; }
+  88% { opacity: 0; transform: translate(130vw, 45vh) rotate(-25deg); }
+}
+
+.footer {
+  min-height: 5vh;
+  align-items: flex-end;
+  font-size: clamp(.9rem, 1.8vmin, 2rem);
+  font-weight: 700;
+}
+
+.status {
+  color: #ffffffb8;
+  font-size: .78em;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.telegram {
+  display: flex;
+  align-items: center;
+  gap: .65em;
+  color: var(--white);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.telegram svg {
+  width: 1.8em;
+  height: 1.8em;
+  flex: 0 0 auto;
+  fill: var(--yellow);
+}
+
+.telegram:hover { color: var(--yellow); }
+
+.controls {
+  position: fixed;
+  z-index: 20;
+  right: 2vw;
+  bottom: 2vh;
+  left: 2vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  padding: .85rem;
+  border: 1px solid #ffffff25;
+  border-radius: 1rem;
+  background: #100f20ed;
+  box-shadow: 0 1rem 4rem #0006;
+  color: white;
+  font-size: var(--ui);
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 250ms, transform 250ms;
+}
+
+.controls .group {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.controls .separator {
+  width: 1px;
+  align-self: stretch;
+  background: #ffffff28;
+  margin: 0 .2rem;
+}
+
+.controls input[type="number"] { width: 5.5em; }
+.controls input[type="text"] { width: 13em; }
+.controls button { white-space: nowrap; }
+
+body.controls-hidden .controls {
+  opacity: 0;
+  transform: translateY(1rem);
+  pointer-events: none;
+}
+
+body.controls-hidden,
+body.controls-hidden * { cursor: none !important; }
+
+@media (max-aspect-ratio: 5/4) {
+  :root { --safe: 5vw; }
+
+  .stage { grid-template-rows: auto 1fr auto; }
+  .topbar { font-size: clamp(1rem, 4vw, 2rem); }
+  .brand {
+    top: 14%;
+    width: 88vw;
+  }
+  .brand-name { font-size: clamp(3rem, 13vw, 7rem); }
+  .center {
+    padding-top: 14vh;
+    padding-bottom: 5vh;
+  }
+  .label { font-size: clamp(1.1rem, 4vw, 2rem); }
+  .timer-shell {
+    width: 90vw;
+    aspect-ratio: 1.45 / 1;
+    max-height: 43vh;
+  }
+  .timer { font-size: clamp(4rem, 21vw, 12rem); }
+  .timer.long { font-size: clamp(3rem, 14vw, 8rem); }
+  .landscape svg { width: 55%; height: 58%; }
+  .footer { font-size: clamp(.85rem, 2.5vw, 1.4rem); }
+  .status { display: none; }
+  .controls { max-height: 48vh; overflow-y: auto; }
+}
+
+@media (max-height: 38rem) and (min-aspect-ratio: 5/4) {
+  :root { --safe: 3vh; }
+  .brand { top: 8%; }
+  .brand-name { font-size: 6vmin; }
+  .center { padding-top: 7vh; padding-bottom: 2vh; }
+  .label { margin-bottom: .5vh; font-size: 2.3vmin; }
+  .timer-shell { max-height: 53vh; }
+  .timer { font-size: 18vmin; }
+  .footer { font-size: 1.7vmin; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="stage" id="stage">
+  <div class="stars" id="stars" aria-hidden="true">
+    <div class="shooting-star"></div>
+  </div>
+
+  <div class="landscape" aria-hidden="true">
+    <svg class="left" viewBox="0 0 500 800" preserveAspectRatio="xMidYMax meet">
+      <g class="leaf-drift">
+        <path class="tree-back" d="M0 800 L0 320 Q55 280 60 200 Q90 260 110 300 Q130 190 185 140 Q170 250 205 320 Q260 240 300 225 Q270 320 300 385 L340 800Z"/>
+        <path class="tree-trunk" d="M35 800 Q90 600 92 410 Q72 330 48 270 Q92 315 110 355 Q108 240 160 160 Q135 295 150 390 Q180 310 220 285 Q185 365 160 435 Q190 590 250 800Z"/>
+        <g class="leaf-drift slow">
+          <ellipse class="tree-leaf-a" cx="82" cy="300" rx="47" ry="22" transform="rotate(35 82 300)"/>
+          <ellipse class="tree-leaf-b" cx="122" cy="236" rx="52" ry="24" transform="rotate(-48 122 236)"/>
+          <ellipse class="tree-leaf-c" cx="177" cy="294" rx="45" ry="22" transform="rotate(18 177 294)"/>
+          <ellipse class="tree-leaf-d" cx="210" cy="342" rx="47" ry="25" transform="rotate(-35 210 342)"/>
+          <ellipse class="tree-leaf-b" cx="55" cy="376" rx="49" ry="22" transform="rotate(-35 55 376)"/>
+          <ellipse class="tree-leaf-c" cx="143" cy="185" rx="34" ry="20" transform="rotate(-20 143 185)"/>
+          <ellipse class="tree-leaf-a" cx="260" cy="282" rx="38" ry="20" transform="rotate(38 260 282)"/>
+          <ellipse class="tree-leaf-d" cx="76" cy="447" rx="45" ry="23" transform="rotate(22 76 447)"/>
+        </g>
+      </g>
+    </svg>
+
+    <svg class="right" viewBox="0 0 500 800" preserveAspectRatio="xMidYMax meet">
+      <g class="leaf-drift slow">
+        <path class="tree-back" d="M0 800 L0 320 Q55 280 60 200 Q90 260 110 300 Q130 190 185 140 Q170 250 205 320 Q260 240 300 225 Q270 320 300 385 L340 800Z"/>
+        <path class="tree-trunk" d="M35 800 Q90 600 92 410 Q72 330 48 270 Q92 315 110 355 Q108 240 160 160 Q135 295 150 390 Q180 310 220 285 Q185 365 160 435 Q190 590 250 800Z"/>
+        <g class="leaf-drift">
+          <ellipse class="tree-leaf-a" cx="82" cy="300" rx="47" ry="22" transform="rotate(35 82 300)"/>
+          <ellipse class="tree-leaf-b" cx="122" cy="236" rx="52" ry="24" transform="rotate(-48 122 236)"/>
+          <ellipse class="tree-leaf-c" cx="177" cy="294" rx="45" ry="22" transform="rotate(18 177 294)"/>
+          <ellipse class="tree-leaf-d" cx="210" cy="342" rx="47" ry="25" transform="rotate(-35 210 342)"/>
+          <ellipse class="tree-leaf-b" cx="55" cy="376" rx="49" ry="22" transform="rotate(-35 55 376)"/>
+          <ellipse class="tree-leaf-c" cx="143" cy="185" rx="34" ry="20" transform="rotate(-20 143 185)"/>
+          <ellipse class="tree-leaf-a" cx="260" cy="282" rx="38" ry="20" transform="rotate(38 260 282)"/>
+          <ellipse class="tree-leaf-d" cx="76" cy="447" rx="45" ry="23" transform="rotate(22 76 447)"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <header class="topbar">
+    <div class="schedule" aria-label="Суббота, 17:30">
+      <span class="day">СБ</span>
+      <span class="divider"></span>
+      <span class="time">17:30</span>
+    </div>
+    <div id="clock" aria-label="Текущее время">--:--</div>
+  </header>
+
+  <div class="brand" aria-label="Молодёжка">
+    <div class="brand-name">Молодёжка</div>
+    <svg class="brand-swish" viewBox="0 0 500 35" aria-hidden="true">
+      <path d="M20 21 C105 33 166 5 255 15 S389 32 477 7"/>
+      <path d="M390 19 Q438 13 474 7 Q455 18 449 25"/>
+    </svg>
+  </div>
+
+  <section class="center">
+    <div class="label" id="message">Начало через…</div>
+
+    <div class="timer-shell">
+      <svg class="bubble" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M130 73
+          C195 52 286 62 370 48
+          C493 29 575 49 681 45
+          C795 39 886 45 911 96
+          C929 135 911 165 924 203
+          C939 246 913 290 873 319
+          C818 359 736 350 655 361
+          C541 377 450 354 351 370
+          C259 385 174 368 121 340
+          C76 316 73 279 83 235
+          C94 189 68 150 87 119
+          C96 102 108 88 130 73 Z"/>
+      </svg>
+      <div class="timer" id="timer" role="timer" aria-live="off">10:00</div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="status" id="status">Grace Youth SPb · вместе лучше</div>
+    <a class="telegram" href="https://t.me/grace_youth_spb" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21.8 3.4 18.5 20c-.25 1.17-.92 1.46-1.87.91l-5.17-3.81-2.5 2.4c-.28.28-.52.52-1.06.52l.37-5.27 9.6-8.67c.42-.37-.1-.58-.65-.21L5.35 13.3.24 11.7c-1.1-.34-1.12-1.1.23-1.63L20.45 2.4c.91-.33 1.71.22 1.35 1z"/>
+      </svg>
+      <span>t.me/grace_youth_spb</span>
+    </a>
+  </footer>
+</main>
+
+<section class="controls" id="controls" aria-label="Управление таймером">
+  <div class="group">
+    <button class="primary" id="startBtn">▶ Старт</button>
+    <button id="resetBtn">↺ Сброс</button>
+    <button id="minusBtn">−1 мин</button>
+    <button id="plusBtn">+1 мин</button>
+  </div>
+
+  <span class="separator"></span>
+
+  <div class="group" aria-label="Быстрые пресеты">
+    <button data-minutes="5">5 мин</button>
+    <button data-minutes="10">10 мин</button>
+    <button data-minutes="15">15 мин</button>
+    <button data-minutes="30">30 мин</button>
+  </div>
+
+  <div class="group">
+    <label for="minutes">Мин.</label>
+    <input id="minutes" type="number" min="0" max="999" value="10" aria-label="Минуты">
+    <label for="seconds">Сек.</label>
+    <input id="seconds" type="number" min="0" max="59" value="0" aria-label="Секунды">
+    <button id="applyBtn">Установить</button>
+  </div>
+
+  <span class="separator"></span>
+
+  <div class="group">
+    <label for="mode">Режим</label>
+    <select id="mode">
+      <option value="countdown">Обратный отсчёт</option>
+      <option value="stopwatch">Секундомер</option>
+      <option value="deadline">До субботы 17:30</option>
+    </select>
+  </div>
+
+  <div class="group">
+    <input id="messageInput" type="text" value="Начало через…" maxlength="70" aria-label="Заголовок таймера">
+    <button id="messageBtn">Заголовок</button>
+  </div>
+
+  <div class="group">
+    <button id="themeBtn">◐ Тёплая тема</button>
+    <button id="soundBtn" aria-pressed="true">♫ Звук: вкл.</button>
+    <button id="fullscreenBtn">⛶ Экран</button>
+  </div>
+</section>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  const stage = $("stage");
+  const timerEl = $("timer");
+  const messageEl = $("message");
+  const statusEl = $("status");
+  const controls = $("controls");
+
+  const state = {
+    mode: "countdown",
+    duration: 10 * 60_000,
+    remaining: 10 * 60_000,
+    running: false,
+    startedAt: 0,
+    startValue: 0,
+    deadline: 0,
+    sound: true,
+    finished: false,
+    theme: "night",
+    wakeLock: null,
+    hideTimer: null,
+    audio: null
+  };
+
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function formatTime(ms) {
+    const total = Math.max(0, Math.floor(ms / 1000));
+    const hours = Math.floor(total / 3600);
+    const minutes = Math.floor((total % 3600) / 60);
+    const seconds = total % 60;
+    const pad = n => String(n).padStart(2, "0");
+
+    if (hours > 0) return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    return `${pad(Math.floor(total / 60))}:${pad(seconds)}`;
+  }
+
+  function nextSaturdayDeadline() {
+    const now = new Date();
+    const result = new Date(now);
+    const daysUntilSaturday = (6 - now.getDay() + 7) % 7;
+
+    result.setDate(now.getDate() + daysUntilSaturday);
+    result.setHours(17, 30, 0, 0);
+
+    if (result.getTime() <= now.getTime()) {
+      result.setDate(result.getDate() + 7);
+    }
+
+    return result.getTime();
+  }
+
+  function currentValue() {
+    if (!state.running) return state.remaining;
+
+    const elapsed = Date.now() - state.startedAt;
+
+    if (state.mode === "stopwatch") {
+      return state.startValue + elapsed;
+    }
+
+    if (state.mode === "deadline") {
+      return Math.max(0, state.deadline - Date.now());
+    }
+
+    return Math.max(0, state.startValue - elapsed);
+  }
+
+  function render() {
+    const value = currentValue();
+    timerEl.textContent = formatTime(value);
+    timerEl.classList.toggle(
+      "long",
+      value >= 3600_000 || timerEl.textContent.length >= 8
+    );
+
+    const urgent = state.mode !== "stopwatch" &&
+      state.running && value > 0 && value <= 60_000;
+
+    timerEl.classList.toggle("pulse", urgent && !reducedMotion);
+
+    if (state.mode === "stopwatch") {
+      statusEl.textContent = state.running ? "Секундомер · идёт" : "Секундомер";
+    } else if (state.mode === "deadline") {
+      statusEl.textContent = "До субботы, 17:30";
+    } else {
+      statusEl.textContent = state.running ? "Grace Youth SPb · идёт отсчёт" : "Grace Youth SPb";
+    }
+
+    if (state.running && state.mode !== "stopwatch" && value <= 0) {
+      finish();
+    }
+  }
+
+  function finish() {
+    if (state.finished) return;
+
+    state.finished = true;
+    state.running = false;
+    state.remaining = 0;
+    timerEl.textContent = "00:00";
+    timerEl.classList.remove("pulse");
+    stage.classList.remove("finished");
+
+    // Restart the CSS flash animation.
+    void stage.offsetWidth;
+    stage.classList.add("finished");
+
+    $("startBtn").textContent = "▶ Старт";
+    statusEl.textContent = "Время!";
+
+    if (state.sound) playChime();
+  }
+
+  function playChime() {
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+
+      if (!state.audio) state.audio = new AudioContextClass();
+      const ctx = state.audio;
+
+      if (ctx.state === "suspended") ctx.resume();
+
+      [660, 880].forEach((frequency, index) => {
+        const oscillator = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const start = ctx.currentTime + index * 0.22;
+
+        oscillator.type = "sine";
+        oscillator.frequency.value = frequency;
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(0.12, start + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.48);
+
+        oscillator.connect(gain);
+        gain.connect(ctx.destination);
+        oscillator.start(start);
+        oscillator.stop(start + 0.5);
+      });
+    } catch (error) {
+      console.warn("Звук недоступен:", error);
+    }
+  }
+
+  function syncInputs() {
+    const totalSeconds = Math.floor(state.remaining / 1000);
+    $("minutes").value = Math.floor(totalSeconds / 60);
+    $("seconds").value = totalSeconds % 60;
+  }
+
+  function pause() {
+    if (!state.running) return;
+
+    state.remaining = currentValue();
+    state.running = false;
+    $("startBtn").textContent = "▶ Старт";
+    render();
+  }
+
+  function start() {
+    if (state.running) {
+      pause();
+      return;
+    }
+
+    if (state.mode === "deadline") {
+      state.deadline = nextSaturdayDeadline();
+      state.remaining = state.deadline - Date.now();
+    }
+
+    if (state.mode === "countdown" && state.remaining <= 0) {
+      state.remaining = state.duration;
+    }
+
+    if (state.mode === "stopwatch") {
+      state.startValue = state.remaining;
+    } else {
+      state.startValue = state.remaining;
+    }
+
+    state.finished = false;
+    stage.classList.remove("finished");
+    state.startedAt = Date.now();
+    state.running = true;
+    $("startBtn").textContent = "Ⅱ Пауза";
+    render();
+    requestWakeLock();
+  }
+
+  function reset() {
+    state.running = false;
+    state.finished = false;
+    stage.classList.remove("finished");
+    timerEl.classList.remove("pulse");
+
+    if (state.mode === "deadline") {
+      state.deadline = nextSaturdayDeadline();
+      state.remaining = state.deadline - Date.now();
+    } else {
+      state.remaining = state.duration;
+    }
+
+    state.startValue = state.remaining;
+    $("startBtn").textContent = "▶ Старт";
+    syncInputs();
+    render();
+  }
+
+  function setDuration(ms) {
+    pause();
+    state.mode = "countdown";
+    $("mode").value = "countdown";
+    state.duration = Math.max(0, ms);
+    state.remaining = state.duration;
+    state.startValue = state.remaining;
+    state.finished = false;
+    stage.classList.remove("finished");
+    syncInputs();
+    render();
+  }
+
+  function adjustTime(delta) {
+    if (state.running) {
+      pause();
+    }
+
+    if (state.mode === "deadline") {
+      state.mode = "countdown";
+      $("mode").value = "countdown";
+    }
+
+    const next = Math.max(0, state.remaining + delta);
+    state.duration = next;
+    state.remaining = next;
+    state.startValue = next;
+    state.finished = false;
+    stage.classList.remove("finished");
+    syncInputs();
+    render();
+  }
+
+  function changeMode(mode) {
+    pause();
+    state.mode = mode;
+    state.finished = false;
+    stage.classList.remove("finished");
+
+    if (mode === "deadline") {
+      state.deadline = nextSaturdayDeadline();
+      state.remaining = state.deadline - Date.now();
+      messageEl.textContent = "Начало уже скоро";
+    } else if (mode === "stopwatch") {
+      state.duration = 0;
+      state.remaining = 0;
+      state.startValue = 0;
+      messageEl.textContent = "Время вместе";
+    } else {
+      state.remaining = state.duration;
+      state.startValue = state.duration;
+      messageEl.textContent = "Начало через…";
+    }
+
+    syncInputs();
+    render();
+  }
+
+  async function requestWakeLock() {
+    if (!("wakeLock" in navigator) || document.visibilityState !== "visible") return;
+
+    try {
+      if (state.wakeLock) return;
+      state.wakeLock = await navigator.wakeLock.request("screen");
+      state.wakeLock.addEventListener("release", () => {
+        state.wakeLock = null;
+      });
+    } catch (error) {
+      // Wake Lock may be unavailable in some browsers or on file:// pages.
+      console.info("Wake Lock недоступен:", error.message);
+    }
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") requestWakeLock();
+  });
+
+  $("startBtn").addEventListener("click", start);
+  $("resetBtn").addEventListener("click", reset);
+  $("minusBtn").addEventListener("click", () => adjustTime(-60_000));
+  $("plusBtn").addEventListener("click", () => adjustTime(60_000));
+
+  document.querySelectorAll("[data-minutes]").forEach(button => {
+    button.addEventListener("click", () => {
+      setDuration(Number(button.dataset.minutes) * 60_000);
+    });
+  });
+
+  $("applyBtn").addEventListener("click", () => {
+    const minutes = Math.max(0, Number($("minutes").value) || 0);
+    const seconds = Math.min(59, Math.max(0, Number($("seconds").value) || 0));
+    setDuration((minutes * 60 + seconds) * 1000);
+  });
+
+  $("mode").addEventListener("change", event => changeMode(event.target.value));
+
+  $("messageBtn").addEventListener("click", () => {
+    const value = $("messageInput").value.trim();
+    if (value) messageEl.textContent = value;
+  });
+
+  $("messageInput").addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      $("messageBtn").click();
+    }
+  });
+
+  $("themeBtn").addEventListener("click", () => {
+    const warm = stage.classList.toggle("warm");
+    state.theme = warm ? "warm" : "night";
+    $("themeBtn").textContent = warm ? "☾ Ночная тема" : "◐ Тёплая тема";
+  });
+
+  $("soundBtn").addEventListener("click", () => {
+    state.sound = !state.sound;
+    $("soundBtn").textContent = state.sound ? "♫ Звук: вкл." : "♫ Звук: выкл.";
+    $("soundBtn").setAttribute("aria-pressed", String(state.sound));
+  });
+
+  async function toggleFullscreen() {
+    try {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (error) {
+      console.warn("Полноэкранный режим недоступен:", error);
+    }
+  }
+
+  $("fullscreenBtn").addEventListener("click", toggleFullscreen);
+
+  document.addEventListener("fullscreenchange", () => {
+    $("fullscreenBtn").textContent =
+      document.fullscreenElement ? "⛶ Выйти" : "⛶ Экран";
+  });
+
+  document.addEventListener("keydown", event => {
+    const target = event.target;
+    const typing = target instanceof HTMLInputElement ||
+      target instanceof HTMLTextAreaElement ||
+      target instanceof HTMLSelectElement ||
+      target.isContentEditable;
+
+    if (typing) {
+      if (event.key === "Escape") target.blur();
+      return;
+    }
+
+    if (event.code === "Space") {
+      event.preventDefault();
+      start();
+    } else if (event.key.toLowerCase() === "r") {
+      reset();
+    } else if (event.key.toLowerCase() === "f") {
+      toggleFullscreen();
+    } else if (event.key === "Escape" && document.fullscreenElement) {
+      document.exitFullscreen();
+    }
+  });
+
+  // Hide controls after inactivity; reveal them with mouse or touch.
+  function showControls() {
+    document.body.classList.remove("controls-hidden");
+    clearTimeout(state.hideTimer);
+
+    state.hideTimer = setTimeout(() => {
+      if (!controls.matches(":hover") &&
+          !controls.contains(document.activeElement)) {
+        document.body.classList.add("controls-hidden");
+      }
+    }, 3000);
+  }
+
+  ["mousemove", "mousedown", "touchstart", "keydown"].forEach(type => {
+    document.addEventListener(type, showControls, { passive: true });
+  });
+
+  controls.addEventListener("mouseenter", () => {
+    clearTimeout(state.hideTimer);
+    document.body.classList.remove("controls-hidden");
+  });
+
+  controls.addEventListener("mouseleave", showControls);
+
+  controls.addEventListener("focusin", () => {
+    clearTimeout(state.hideTimer);
+    document.body.classList.remove("controls-hidden");
+  });
+
+  controls.addEventListener("focusout", () => {
+    setTimeout(showControls, 100);
+  });
+
+  // Decorative stars are generated once, not every animation frame.
+  const stars = $("stars");
+  let seed = 271828;
+  function random() {
+    seed = (seed * 16807) % 2147483647;
+    return (seed - 1) / 2147483646;
+  }
+
+  for (let i = 0; i < 64; i++) {
+    const star = document.createElement("span");
+    star.className = "star";
+    star.style.left = `${random() * 100}%`;
+    star.style.top = `${random() * 100}%`;
+    star.style.opacity = String(0.2 + random() * 0.65);
+    star.style.animationDelay = `${random() * 5}s`;
+    star.style.animationDuration = `${3 + random() * 4}s`;
+    if (i % 5 === 0) {
+      star.style.width = "0.4vmin";
+      star.style.height = "0.4vmin";
+    }
+    stars.appendChild(star);
+  }
+
+  function updateClock() {
+    const now = new Date();
+    $("clock").textContent = now.toLocaleTimeString("ru-RU", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    });
+  }
+
+  // Date.now() is the source of truth, so background-tab delays do not drift.
+  function tick() {
+    updateClock();
+    render();
+  }
+
+  state.deadline = nextSaturdayDeadline();
+  syncInputs();
+  updateClock();
+  render();
+  setInterval(tick, 100);
+  showControls();
+})();
+</script>
+</body>
+</html>
