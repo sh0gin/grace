@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-season="autumn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#111126">
+<meta name="theme-color" content="#111126" id="themeColor">
 <title>Молодёжка — Grace Youth SPb</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,12 +13,116 @@
 <style>
 :root {
   color-scheme: dark;
-  --yellow: #ffc72c;
   --white: #fffdf6;
   --ink: #111126;
   --safe: 4.5vmin;
   --ui: clamp(.8rem, 1.05vmin, 1.2rem);
   --transition: 500ms;
+
+  /* ===== Сезон по умолчанию: осень ===== */
+  --yellow: #ffc72c;
+  --timer-shadow: #5a3b11;
+  --stars: 1;
+  --trunk: #100f20;
+  --tree-back: #763b32;
+  --leaf-a: #b9502f;
+  --leaf-b: #e58b38;
+  --leaf-c: #f1b348;
+  --leaf-d: #793a39;
+  --bg:
+    radial-gradient(ellipse at 50% 53%, #383057 0%, transparent 48%),
+    radial-gradient(ellipse at 12% 80%, #492d35 0%, transparent 44%),
+    radial-gradient(ellipse at 88% 18%, #25264c 0%, transparent 42%),
+    linear-gradient(145deg, #111126 0%, #1c1b3b 44%, #171326 100%);
+}
+
+/* ===== Зима ===== */
+:root[data-season="winter"] {
+  --yellow: #a9dcff;
+  --timer-shadow: #1b3b5e;
+  --stars: 1;
+  --trunk: #0b1222;
+  --tree-back: #35507a;
+  --leaf-a: #e8f4ff;
+  --leaf-b: #bcdcf5;
+  --leaf-c: #ffffff;
+  --leaf-d: #8fb8de;
+  --bg:
+    radial-gradient(ellipse at 50% 53%, #3a5f8f 0%, transparent 50%),
+    radial-gradient(ellipse at 15% 85%, #2b4a7a 0%, transparent 45%),
+    radial-gradient(ellipse at 88% 15%, #1f3a66 0%, transparent 42%),
+    linear-gradient(160deg, #0e1a33 0%, #1d3557 50%, #14233f 100%);
+}
+
+/* ===== Лето ===== */
+:root[data-season="summer"] {
+  --yellow: #ffe066;
+  --timer-shadow: #0d4a63;
+  --stars: 0;
+  --trunk: #1d2b1c;
+  --tree-back: #1f5a3a;
+  --leaf-a: #2e8b57;
+  --leaf-b: #4caf50;
+  --leaf-c: #8bc34a;
+  --leaf-d: #1b6b3a;
+  --bg:
+    radial-gradient(circle at 85% 12%, #ffe58a 0%, #ffd04a55 10%, transparent 34%),
+    radial-gradient(ellipse at 50% 105%, #2f8f5b 0%, transparent 55%),
+    linear-gradient(170deg, #1565a0 0%, #2a8fb5 55%, #23846a 100%);
+}
+
+/* ===== Весна ===== */
+:root[data-season="spring"] {
+  --yellow: #ffd1e3;
+  --timer-shadow: #5a2a45;
+  --stars: 0;
+  --trunk: #2a1f26;
+  --tree-back: #5a4a58;
+  --leaf-a: #f4a6c0;
+  --leaf-b: #ffd1dc;
+  --leaf-c: #fff0f5;
+  --leaf-d: #c9e6a1;
+  --bg:
+    radial-gradient(ellipse at 50% 50%, #5e8f6e 0%, transparent 52%),
+    radial-gradient(ellipse at 10% 85%, #8a5a86 0%, transparent 45%),
+    radial-gradient(ellipse at 90% 15%, #7aa07c 0%, transparent 42%),
+    linear-gradient(150deg, #2f5a4a 0%, #4d7a63 50%, #6b5a85 100%);
+}
+
+/* ===== Рождество ===== */
+:root[data-season="christmas"] {
+  --yellow: #ffd24a;
+  --timer-shadow: #5a1020;
+  --stars: 1;
+  --trunk: #0a0f0c;
+  --tree-back: #1b5a3a;
+  --leaf-a: #d63a3a;
+  --leaf-b: #1f8a52;
+  --leaf-c: #f4c542;
+  --leaf-d: #0f5a37;
+  --bg:
+    radial-gradient(ellipse at 50% 53%, #3c1f2f 0%, transparent 50%),
+    radial-gradient(ellipse at 12% 85%, #0f4a32 0%, transparent 46%),
+    radial-gradient(ellipse at 88% 15%, #5a1424 0%, transparent 44%),
+    linear-gradient(145deg, #0b1a14 0%, #14301f 45%, #2a0f18 100%);
+}
+
+/* ===== Пасха ===== */
+:root[data-season="easter"] {
+  --yellow: #ffe58a;
+  --timer-shadow: #3d2a6a;
+  --stars: 0;
+  --trunk: #2a2140;
+  --tree-back: #7a5fa8;
+  --leaf-a: #ffc8dd;
+  --leaf-b: #bde0fe;
+  --leaf-c: #fff1a8;
+  --leaf-d: #b8f2c9;
+  --bg:
+    radial-gradient(ellipse at 50% 50%, #8b6fc0 0%, transparent 52%),
+    radial-gradient(ellipse at 10% 85%, #b0558f 0%, transparent 45%),
+    radial-gradient(ellipse at 90% 15%, #6f7fd0 0%, transparent 42%),
+    linear-gradient(150deg, #4b3f8a 0%, #6a52a5 50%, #8f4f95 100%);
 }
 
 * { box-sizing: border-box; }
@@ -66,7 +169,7 @@ button.primary {
   font-weight: 800;
 }
 
-button.primary:hover { background: #ffda67; }
+button.primary:hover { background: color-mix(in srgb, var(--yellow) 85%, white); }
 
 input, select {
   min-width: 0;
@@ -91,12 +194,7 @@ input:focus-visible, select:focus-visible {
   min-height: 0;
   padding: var(--safe);
   isolation: isolate;
-  background:
-    radial-gradient(ellipse at 50% 53%, #383057 0%, transparent 48%),
-    radial-gradient(ellipse at 12% 80%, #492d35 0%, transparent 44%),
-    radial-gradient(ellipse at 88% 18%, #25264c 0%, transparent 42%),
-    linear-gradient(145deg, #111126 0%, #1c1b3b 44%, #171326 100%);
-  transition: background var(--transition);
+  background: var(--bg);
 }
 
 .stage::before {
@@ -117,14 +215,6 @@ input:focus-visible, select:focus-visible {
   inset: 0;
   pointer-events: none;
   box-shadow: inset 0 0 14vmin #05040d55;
-}
-
-/* Warm alternative inspired by the announcement artwork */
-.stage.warm {
-  background:
-    radial-gradient(ellipse at 35% 48%, #b3aaa0 0%, transparent 56%),
-    radial-gradient(ellipse at 90% 70%, #655957 0%, transparent 55%),
-    linear-gradient(125deg, #4e494b, #928781 48%, #575052);
 }
 
 .topbar, .footer {
@@ -240,15 +330,13 @@ input:focus-visible, select:focus-visible {
 }
 
 .bubble path {
-  fill: #17162a09;
+  fill: #fffdf60b;
   stroke: var(--white);
   stroke-width: 2.4;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
-
-.warm .bubble path { fill: #fffdf60b; }
 
 .timer {
   position: relative;
@@ -263,7 +351,7 @@ input:focus-visible, select:focus-visible {
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   text-shadow:
-    0 .035em 0 #5a3b11,
+    0 .035em 0 var(--timer-shadow),
     0 .07em .12em #00000038;
   transform: translateY(-.015em);
 }
@@ -282,11 +370,11 @@ input:focus-visible, select:focus-visible {
 }
 
 @keyframes flash {
-  0% { background-color: #ffc72c80; opacity: .7; }
+  0% { background-color: color-mix(in srgb, var(--yellow) 50%, transparent); opacity: .7; }
   100% { background-color: transparent; opacity: .12; }
 }
 
-/* Trees are vector silhouettes; no raster backgrounds */
+/* Деревья — векторные силуэты, цвета задаются сезоном */
 .landscape {
   position: absolute;
   z-index: -1;
@@ -308,12 +396,12 @@ input:focus-visible, select:focus-visible {
 .landscape .left { left: -4%; }
 .landscape .right { right: -4%; transform: scaleX(-1); }
 
-.tree-trunk { fill: #100f20; opacity: .78; }
-.tree-back { fill: #763b32; opacity: .55; }
-.tree-leaf-a { fill: #b9502f; opacity: .7; }
-.tree-leaf-b { fill: #e58b38; opacity: .65; }
-.tree-leaf-c { fill: #f1b348; opacity: .7; }
-.tree-leaf-d { fill: #793a39; opacity: .8; }
+.tree-trunk { fill: var(--trunk); opacity: .78; transition: fill var(--transition); }
+.tree-back { fill: var(--tree-back); opacity: .55; transition: fill var(--transition); }
+.tree-leaf-a { fill: var(--leaf-a); opacity: .7; transition: fill var(--transition); }
+.tree-leaf-b { fill: var(--leaf-b); opacity: .65; transition: fill var(--transition); }
+.tree-leaf-c { fill: var(--leaf-c); opacity: .7; transition: fill var(--transition); }
+.tree-leaf-d { fill: var(--leaf-d); opacity: .8; transition: fill var(--transition); }
 
 .leaf-drift { animation: drift 13s ease-in-out infinite alternate; }
 .leaf-drift.slow { animation-duration: 19s; animation-delay: -5s; }
@@ -328,6 +416,8 @@ input:focus-visible, select:focus-visible {
   z-index: -1;
   inset: 0;
   pointer-events: none;
+  opacity: var(--stars);
+  transition: opacity var(--transition);
 }
 
 .star {
@@ -369,6 +459,51 @@ input:focus-visible, select:focus-visible {
   88% { opacity: 0; transform: translate(130vw, 45vh) rotate(-25deg); }
 }
 
+/* Сезонные частицы: снег, листья, лепестки, светлячки, яйца */
+.fall {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  will-change: transform;
+  animation: fall linear infinite;
+}
+
+.p.snow { border-radius: 50%; box-shadow: 0 0 .6vmin #ffffff80; }
+.p.leaf { border-radius: 0 100% 0 100%; }
+.p.petal { border-radius: 100% 0 100% 0; }
+.p.egg {
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background-image: linear-gradient(transparent 38%, #ffffffa0 38% 54%, transparent 54%);
+}
+.p.glow {
+  border-radius: 50%;
+  box-shadow: 0 0 1.2vmin .3vmin currentColor;
+  animation-name: rise;
+}
+
+@keyframes fall {
+  0%   { transform: translate3d(0, -10vh, 0) rotate(0); opacity: 0; }
+  10%  { opacity: var(--op, .9); }
+  90%  { opacity: var(--op, .9); }
+  100% { transform: translate3d(var(--dx), 110vh, 0) rotate(var(--rot)); opacity: 0; }
+}
+
+@keyframes rise {
+  0%   { transform: translate3d(0, 105vh, 0) scale(.6); opacity: 0; }
+  15%  { opacity: var(--op, .85); }
+  85%  { opacity: var(--op, .85); }
+  100% { transform: translate3d(var(--dx), -10vh, 0) scale(1.1); opacity: 0; }
+}
+
 .footer {
   min-height: 5vh;
   align-items: flex-end;
@@ -400,6 +535,16 @@ input:focus-visible, select:focus-visible {
 }
 
 .telegram:hover { color: var(--yellow); }
+
+/* Невидимая зона у нижнего края: наведение возвращает панель */
+.controls-zone {
+  position: fixed;
+  z-index: 19;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 14vh;
+}
 
 .controls {
   position: fixed;
@@ -443,12 +588,15 @@ input:focus-visible, select:focus-visible {
 
 body.controls-hidden .controls {
   opacity: 0;
-  transform: translateY(1rem);
+  transform: translateY(1.5rem);
   pointer-events: none;
 }
 
 body.controls-hidden,
 body.controls-hidden * { cursor: none !important; }
+
+/* Над зоной наведения курсор остаётся видимым */
+body.controls-hidden .controls-zone { cursor: default !important; }
 
 @media (max-aspect-ratio: 5/4) {
   :root { --safe: 5vw; }
@@ -542,6 +690,8 @@ body.controls-hidden * { cursor: none !important; }
     </svg>
   </div>
 
+  <div class="fall" id="fall" aria-hidden="true"></div>
+
   <header class="topbar">
     <div class="schedule" aria-label="Суббота, 17:30">
       <span class="day">СБ</span>
@@ -592,6 +742,8 @@ body.controls-hidden * { cursor: none !important; }
   </footer>
 </main>
 
+<div class="controls-zone" id="controlsZone" aria-hidden="true"></div>
+
 <section class="controls" id="controls" aria-label="Управление таймером">
   <div class="group">
     <button class="primary" id="startBtn">▶ Старт</button>
@@ -629,12 +781,23 @@ body.controls-hidden * { cursor: none !important; }
   </div>
 
   <div class="group">
+    <label for="season">Сезон</label>
+    <select id="season">
+      <option value="autumn">🍂 Осень</option>
+      <option value="winter">❄ Зима</option>
+      <option value="spring">🌸 Весна</option>
+      <option value="summer">☀ Лето</option>
+      <option value="christmas">🎄 Рождество</option>
+      <option value="easter">🥚 Пасха</option>
+    </select>
+  </div>
+
+  <div class="group">
     <input id="messageInput" type="text" value="Начало через…" maxlength="70" aria-label="Заголовок таймера">
     <button id="messageBtn">Заголовок</button>
   </div>
 
   <div class="group">
-    <button id="themeBtn">◐ Тёплая тема</button>
     <button id="soundBtn" aria-pressed="true">♫ Звук: вкл.</button>
     <button id="fullscreenBtn">⛶ Экран</button>
   </div>
@@ -650,6 +813,7 @@ body.controls-hidden * { cursor: none !important; }
   const messageEl = $("message");
   const statusEl = $("status");
   const controls = $("controls");
+  const zone = $("controlsZone");
 
   const state = {
     mode: "countdown",
@@ -661,13 +825,95 @@ body.controls-hidden * { cursor: none !important; }
     deadline: 0,
     sound: true,
     finished: false,
-    theme: "night",
     wakeLock: null,
-    hideTimer: null,
     audio: null
   };
 
+  const ui = { hover: false, hideTimer: null };
+
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ================= Сезоны ================= */
+
+  const SEASONS = {
+    autumn: {
+      themeColor: "#111126",
+      kind: "leaf", count: 26, size: [1.2, 2.2], duration: [11, 20], drift: 12,
+      colors: ["#e58b38", "#b9502f", "#f1b348", "#c4442e"]
+    },
+    winter: {
+      themeColor: "#0e1a33",
+      kind: "snow", count: 80, size: [.35, .9], duration: [9, 18], drift: 6,
+      colors: ["#ffffff", "#e6f4ff", "#cfe9ff"]
+    },
+    spring: {
+      themeColor: "#2f5a4a",
+      kind: "petal", count: 34, size: [1, 1.7], duration: [10, 18], drift: 12,
+      colors: ["#ffc2d6", "#ffe0ea", "#ffffff", "#f7a8c4"]
+    },
+    summer: {
+      themeColor: "#1565a0",
+      kind: "glow", count: 36, size: [.35, .8], duration: [9, 18], drift: 8, opacity: .85,
+      colors: ["#fff2a0", "#ffe066", "#d9ff8a"]
+    },
+    christmas: {
+      themeColor: "#0b1a14",
+      kind: "snow", count: 60, size: [.35, .9], duration: [9, 18], drift: 6,
+      colors: ["#ffffff", "#ffffff", "#e6f4ff", "#ffd76a"]
+    },
+    easter: {
+      themeColor: "#4b3f8a",
+      kind: "egg", count: 24, size: [1.3, 2], duration: [14, 24], drift: 8,
+      colors: ["#ffc8dd", "#bde0fe", "#fff1a8", "#cdb4f6", "#b8f2c9"]
+    }
+  };
+
+  const fallEl = $("fall");
+  const rand = (min, max) => min + Math.random() * (max - min);
+
+  function buildParticles(name) {
+    fallEl.replaceChildren();
+    if (reducedMotion) return;
+
+    const cfg = SEASONS[name];
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < cfg.count; i++) {
+      const el = document.createElement("span");
+      const color = cfg.colors[Math.floor(Math.random() * cfg.colors.length)];
+      const size = rand(cfg.size[0], cfg.size[1]);
+
+      el.className = `p ${cfg.kind}`;
+      el.style.left = `${rand(0, 100)}%`;
+      el.style.width = `${size}vmin`;
+      el.style.height = `${cfg.kind === "egg" ? size * 1.3 : size}vmin`;
+      el.style.backgroundColor = color;
+      el.style.color = color;
+      el.style.animationDuration = `${rand(cfg.duration[0], cfg.duration[1])}s`;
+      el.style.animationDelay = `${-rand(0, cfg.duration[1])}s`;
+      el.style.setProperty("--dx", `${rand(-cfg.drift, cfg.drift)}vw`);
+      el.style.setProperty("--rot", `${rand(-360, 360)}deg`);
+      el.style.setProperty("--op", String(cfg.opacity ?? rand(.55, .95)));
+      fragment.appendChild(el);
+    }
+
+    fallEl.appendChild(fragment);
+  }
+
+  function setSeason(name, save = true) {
+    if (!SEASONS[name]) name = "autumn";
+
+    document.documentElement.dataset.season = name;
+    $("season").value = name;
+    $("themeColor").content = SEASONS[name].themeColor;
+    buildParticles(name);
+
+    if (save) {
+      try { localStorage.setItem("molodezhka-season", name); } catch (_) {}
+    }
+  }
+
+  /* ================= Таймер ================= */
 
   function formatTime(ms) {
     const total = Math.max(0, Math.floor(ms / 1000));
@@ -700,14 +946,8 @@ body.controls-hidden * { cursor: none !important; }
 
     const elapsed = Date.now() - state.startedAt;
 
-    if (state.mode === "stopwatch") {
-      return state.startValue + elapsed;
-    }
-
-    if (state.mode === "deadline") {
-      return Math.max(0, state.deadline - Date.now());
-    }
-
+    if (state.mode === "stopwatch") return state.startValue + elapsed;
+    if (state.mode === "deadline") return Math.max(0, state.deadline - Date.now());
     return Math.max(0, state.startValue - elapsed);
   }
 
@@ -729,12 +969,14 @@ body.controls-hidden * { cursor: none !important; }
     } else if (state.mode === "deadline") {
       statusEl.textContent = "До субботы, 17:30";
     } else {
-      statusEl.textContent = state.running ? "Grace Youth SPb · идёт отсчёт" : "Grace Youth SPb";
+      statusEl.textContent = state.running ? "Grace Youth SPb" : "Grace Youth SPb";
     }
 
     if (state.running && state.mode !== "stopwatch" && value <= 0) {
       finish();
     }
+
+    syncControls();
   }
 
   function finish() {
@@ -747,7 +989,7 @@ body.controls-hidden * { cursor: none !important; }
     timerEl.classList.remove("pulse");
     stage.classList.remove("finished");
 
-    // Restart the CSS flash animation.
+    // Перезапуск CSS-анимации вспышки
     void stage.offsetWidth;
     stage.classList.add("finished");
 
@@ -818,12 +1060,7 @@ body.controls-hidden * { cursor: none !important; }
       state.remaining = state.duration;
     }
 
-    if (state.mode === "stopwatch") {
-      state.startValue = state.remaining;
-    } else {
-      state.startValue = state.remaining;
-    }
-
+    state.startValue = state.remaining;
     state.finished = false;
     stage.classList.remove("finished");
     state.startedAt = Date.now();
@@ -866,9 +1103,7 @@ body.controls-hidden * { cursor: none !important; }
   }
 
   function adjustTime(delta) {
-    if (state.running) {
-      pause();
-    }
+    pause();
 
     if (state.mode === "deadline") {
       state.mode = "countdown";
@@ -920,7 +1155,6 @@ body.controls-hidden * { cursor: none !important; }
         state.wakeLock = null;
       });
     } catch (error) {
-      // Wake Lock may be unavailable in some browsers or on file:// pages.
       console.info("Wake Lock недоступен:", error.message);
     }
   }
@@ -928,6 +1162,60 @@ body.controls-hidden * { cursor: none !important; }
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") requestWakeLock();
   });
+
+  /* ================= Панель управления ================= */
+
+  // Панель скрыта, только пока таймер идёт, а курсор вне панели и нижней зоны.
+  function keyboardFocus() {
+    const active = document.activeElement;
+    return !!active && controls.contains(active) && active.matches(":focus-visible");
+  }
+
+  function shouldHideControls() {
+    return state.running && !ui.hover && !keyboardFocus();
+  }
+
+  function syncControls() {
+    const body = document.body;
+    const hidden = body.classList.contains("controls-hidden");
+
+    if (!shouldHideControls()) {
+      clearTimeout(ui.hideTimer);
+      ui.hideTimer = null;
+      if (hidden) body.classList.remove("controls-hidden");
+      return;
+    }
+
+    if (hidden || ui.hideTimer) return;
+
+    // Небольшая задержка, чтобы панель не мигала при переходе зона → панель
+    ui.hideTimer = setTimeout(() => {
+      ui.hideTimer = null;
+      if (shouldHideControls()) body.classList.add("controls-hidden");
+    }, 400);
+  }
+
+  function setHover(value) {
+    ui.hover = value;
+    syncControls();
+  }
+
+  [zone, controls].forEach(el => {
+    el.addEventListener("mouseenter", () => setHover(true));
+    el.addEventListener("mouseleave", () => setHover(false));
+    el.addEventListener("touchstart", () => setHover(true), { passive: true });
+  });
+
+  // Тач: касание вне панели и зоны прячет панель
+  document.addEventListener("touchstart", event => {
+    if (!controls.contains(event.target) && !zone.contains(event.target)) {
+      setHover(false);
+    }
+  }, { passive: true });
+
+  document.documentElement.addEventListener("mouseleave", () => setHover(false));
+
+  /* ================= Обработчики ================= */
 
   $("startBtn").addEventListener("click", start);
   $("resetBtn").addEventListener("click", reset);
@@ -947,6 +1235,7 @@ body.controls-hidden * { cursor: none !important; }
   });
 
   $("mode").addEventListener("change", event => changeMode(event.target.value));
+  $("season").addEventListener("change", event => setSeason(event.target.value));
 
   $("messageBtn").addEventListener("click", () => {
     const value = $("messageInput").value.trim();
@@ -958,12 +1247,6 @@ body.controls-hidden * { cursor: none !important; }
       event.preventDefault();
       $("messageBtn").click();
     }
-  });
-
-  $("themeBtn").addEventListener("click", () => {
-    const warm = stage.classList.toggle("warm");
-    state.theme = warm ? "warm" : "night";
-    $("themeBtn").textContent = warm ? "☾ Ночная тема" : "◐ Тёплая тема";
   });
 
   $("soundBtn").addEventListener("click", () => {
@@ -1015,40 +1298,8 @@ body.controls-hidden * { cursor: none !important; }
     }
   });
 
-  // Hide controls after inactivity; reveal them with mouse or touch.
-  function showControls() {
-    document.body.classList.remove("controls-hidden");
-    clearTimeout(state.hideTimer);
+  /* ================= Звёзды (генерируются один раз) ================= */
 
-    state.hideTimer = setTimeout(() => {
-      if (!controls.matches(":hover") &&
-          !controls.contains(document.activeElement)) {
-        document.body.classList.add("controls-hidden");
-      }
-    }, 3000);
-  }
-
-  ["mousemove", "mousedown", "touchstart", "keydown"].forEach(type => {
-    document.addEventListener(type, showControls, { passive: true });
-  });
-
-  controls.addEventListener("mouseenter", () => {
-    clearTimeout(state.hideTimer);
-    document.body.classList.remove("controls-hidden");
-  });
-
-  controls.addEventListener("mouseleave", showControls);
-
-  controls.addEventListener("focusin", () => {
-    clearTimeout(state.hideTimer);
-    document.body.classList.remove("controls-hidden");
-  });
-
-  controls.addEventListener("focusout", () => {
-    setTimeout(showControls, 100);
-  });
-
-  // Decorative stars are generated once, not every animation frame.
   const stars = $("stars");
   let seed = 271828;
   function random() {
@@ -1080,18 +1331,21 @@ body.controls-hidden * { cursor: none !important; }
     });
   }
 
-  // Date.now() is the source of truth, so background-tab delays do not drift.
+  // Date.now() — источник истины, поэтому фоновые вкладки не сбивают отсчёт
   function tick() {
     updateClock();
     render();
   }
+
+  let savedSeason = "autumn";
+  try { savedSeason = localStorage.getItem("molodezhka-season") || "autumn"; } catch (_) {}
+  setSeason(savedSeason, false);
 
   state.deadline = nextSaturdayDeadline();
   syncInputs();
   updateClock();
   render();
   setInterval(tick, 100);
-  showControls();
 })();
 </script>
 </body>
