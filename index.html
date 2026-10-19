@@ -319,6 +319,9 @@ input:focus-visible, select:focus-visible {
 
 .label.label-hidden { display: none; }
 
+/* Скрытие элементов интерфейса кнопками нижней консоли */
+.hidden-el { display: none !important; }
+
 .timer-shell {
   position: relative;
   display: grid;
@@ -810,6 +813,17 @@ body.controls-hidden .controls-zone { cursor: default !important; }
   </div>
 
   <div class="group">
+    <input id="brandInput" type="text" value="Молодёжка" maxlength="30" aria-label="Название над таймером">
+    <button id="brandBtn">Название</button>
+  </div>
+
+  <div class="group">
+    <button id="scheduleToggleBtn" aria-pressed="false">🕐 Убрать время</button>
+    <button id="statusToggleBtn" aria-pressed="false">🏷 Убрать статус</button>
+    <button id="telegramToggleBtn" aria-pressed="false">✈ Убрать ссылку</button>
+  </div>
+
+  <div class="group">
     <button id="soundBtn" aria-pressed="true">♫ Звук: вкл.</button>
     <button id="fullscreenBtn">⛶ Экран</button>
   </div>
@@ -1277,6 +1291,72 @@ body.controls-hidden .controls-zone { cursor: default !important; }
   let savedLabelHidden = "0";
   try { savedLabelHidden = localStorage.getItem("molodezhka-label-hidden") || "0"; } catch (_) {}
   if (savedLabelHidden === "1") setLabelHidden(true);
+
+  /* Название «Молодёжка» (выбор сохраняется) */
+
+  const brandNameEl = document.querySelector(".brand-name");
+
+  function setBrand(text) {
+    const value = text.trim() || "Молодёжка";
+    brandNameEl.textContent = value;
+    $("brandInput").value = value;
+    try { localStorage.setItem("molodezhka-brand", value); } catch (_) {}
+  }
+
+  $("brandBtn").addEventListener("click", () => setBrand($("brandInput").value));
+
+  $("brandInput").addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      $("brandBtn").click();
+    }
+  });
+
+  let savedBrand = "";
+  try { savedBrand = localStorage.getItem("molodezhka-brand") || ""; } catch (_) {}
+  if (savedBrand) setBrand(savedBrand);
+
+  /* Скрытие/показ элементов интерфейса (17:30, статус, ссылка) */
+
+  function createVisibilityToggle(buttonId, element, storageKey, labels) {
+    const button = $(buttonId);
+
+    function apply(hidden) {
+      element.classList.toggle("hidden-el", hidden);
+      button.textContent = hidden ? labels.show : labels.hide;
+      button.setAttribute("aria-pressed", String(hidden));
+      try { localStorage.setItem(storageKey, hidden ? "1" : "0"); } catch (_) {}
+    }
+
+    button.addEventListener("click", () => {
+      apply(!element.classList.contains("hidden-el"));
+    });
+
+    let saved = "0";
+    try { saved = localStorage.getItem(storageKey) || "0"; } catch (_) {}
+    if (saved === "1") apply(true);
+  }
+
+  createVisibilityToggle(
+    "scheduleToggleBtn",
+    document.querySelector(".schedule"),
+    "molodezhka-hide-schedule",
+    { hide: "🕐 Убрать время", show: "🕐 Показать время" }
+  );
+
+  createVisibilityToggle(
+    "statusToggleBtn",
+    statusEl,
+    "molodezhka-hide-status",
+    { hide: "🏷 Убрать статус", show: "🏷 Показать статус" }
+  );
+
+  createVisibilityToggle(
+    "telegramToggleBtn",
+    document.querySelector(".telegram"),
+    "molodezhka-hide-telegram",
+    { hide: "✈ Убрать ссылку", show: "✈ Показать ссылку" }
+  );
 
   $("soundBtn").addEventListener("click", () => {
     state.sound = !state.sound;
