@@ -11,6 +11,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat:wght@500;600;700;800&family=Neucha&display=swap" rel="stylesheet">
 
 <style>
+/* ===== Шрифт цифр таймера ===== */
+@font-face {
+  font-family: "NauryzRedKeds";
+  src: url("fonts/nauryzredkeds/NauryzRedKeds.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   color-scheme: dark;
   --white: #fffdf6;
@@ -308,6 +317,8 @@ input:focus-visible, select:focus-visible {
   text-shadow: 0 .08em .3em #09081480;
 }
 
+.label.label-hidden { display: none; }
+
 .timer-shell {
   position: relative;
   display: grid;
@@ -343,7 +354,7 @@ input:focus-visible, select:focus-visible {
   z-index: 1;
   max-width: 91%;
   color: var(--yellow);
-  font-family: Neucha, "Marck Script", cursive;
+  font-family: "NauryzRedKeds", Neucha, "Marck Script", cursive;
   font-size: clamp(5rem, 20vmin, 28rem);
   font-weight: 700;
   line-height: .98;
@@ -795,6 +806,7 @@ body.controls-hidden .controls-zone { cursor: default !important; }
   <div class="group">
     <input id="messageInput" type="text" value="Начало через…" maxlength="70" aria-label="Заголовок таймера">
     <button id="messageBtn">Заголовок</button>
+    <button id="labelToggleBtn" aria-pressed="false">🙈 Убрать надпись</button>
   </div>
 
   <div class="group">
@@ -1248,6 +1260,23 @@ body.controls-hidden .controls-zone { cursor: default !important; }
       $("messageBtn").click();
     }
   });
+
+  /* Скрытие/показ надписи над таймером (выбор сохраняется) */
+
+  function setLabelHidden(hidden) {
+    messageEl.classList.toggle("label-hidden", hidden);
+    $("labelToggleBtn").textContent = hidden ? "👁 Показать надпись" : "🙈 Убрать надпись";
+    $("labelToggleBtn").setAttribute("aria-pressed", String(hidden));
+    try { localStorage.setItem("molodezhka-label-hidden", hidden ? "1" : "0"); } catch (_) {}
+  }
+
+  $("labelToggleBtn").addEventListener("click", () => {
+    setLabelHidden(!messageEl.classList.contains("label-hidden"));
+  });
+
+  let savedLabelHidden = "0";
+  try { savedLabelHidden = localStorage.getItem("molodezhka-label-hidden") || "0"; } catch (_) {}
+  if (savedLabelHidden === "1") setLabelHidden(true);
 
   $("soundBtn").addEventListener("click", () => {
     state.sound = !state.sound;
