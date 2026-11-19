@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Связь</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg1: #0b1530;
+    --bg2: #1b2b5c;
+    --gold: #e8c26a;
+    --text: #f4efe3;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background:
+      radial-gradient(ellipse at 50% 30%, var(--bg2), var(--bg1) 70%);
+    color: var(--text);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    text-align: center;
+  }
+  main { max-width: 420px; width: 100%; }
+
+  .signal { width: 180px; height: 180px; margin: 0 auto 32px; overflow: visible; }
+  .arc {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 10;
+    stroke-linecap: round;
+    opacity: .15;
+    animation: pulse 2.4s ease-in-out infinite;
+    filter: drop-shadow(0 0 6px rgba(232,194,106,.6));
+  }
+  .a1 { animation-delay: 0s; }
+  .a2 { animation-delay: .35s; }
+  .a3 { animation-delay: .7s; }
+  @keyframes pulse {
+    0%, 100% { opacity: .15; }
+    40%, 60% { opacity: 1; }
+  }
+  .cross { fill: var(--gold); filter: drop-shadow(0 0 8px rgba(232,194,106,.8)); }
+
+  h1 {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    line-height: 1.1;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+  }
+  h1 em { color: var(--gold); font-style: italic; text-transform: none; }
+
+  .meta {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(232,194,106,.35);
+    font-size: 1.25rem;
+    line-height: 1.7;
+    opacity: .9;
+  }
+  .meta span { color: var(--gold); }
+
+  @media (prefers-reduced-motion: reduce) { .arc { animation: none; opacity: 1; } }
+</style>
+</head>
+<body>
+<main>
+  <svg class="signal" viewBox="0 0 120 120" aria-hidden="true">
+    <path class="arc a3" d="M12 52 A68 68 0 0 1 108 52"/>
+    <path class="arc a2" d="M28 68 A44 44 0 0 1 92 68"/>
+    <path class="arc a1" d="M44 84 A20 20 0 0 1 76 84"/>
+    <!-- крест вместо точки -->
+    <path class="cross" d="M56 92h8v8h8v8h-8v12h-8v-12h-8v-8h8z" transform="translate(0,-6)"/>
+  </svg>
+
+  <h1>Единственная связь,<br>которая тебе нужна, —<br>с <em>Богом</em></h1>
+
+  <p class="meta">
+    Сеть: <span>Небеса</span><br>
+    Пароль: <span>не нужен</span><br>
+    Сигнал: <span>всегда полный</span>
+  </p>
+</main>
+</body>
+</html>
